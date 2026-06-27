@@ -13,6 +13,10 @@ const startServer = async () => {
   // Ensure mongoose.connect() is called and connection state is resolved before routes are loaded
   await connectDB();
 
+  // Auto-seed database if it is empty
+  const autoSeed = require('./config/autoSeed');
+  await autoSeed();
+
   // Load routes and middleware after connection setup
   const authRoutes = require('./routes/authRoutes');
   const productRoutes = require('./routes/productRoutes');
